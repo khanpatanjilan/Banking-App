@@ -2,6 +2,8 @@ package net.javaguides.banking.controller;
 
 import net.javaguides.banking.dto.AccountDto;
 import net.javaguides.banking.dto.TransferFundDto;
+import net.javaguides.banking.dto.TrasactionDto;
+import net.javaguides.banking.entity.Transaction;
 import net.javaguides.banking.service.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -76,4 +78,14 @@ public class AccountController {
           return ResponseEntity.ok("Found Transfered");
 
     }
+
+    // Build transactions REST API
+    @GetMapping("/{id}/transactions")
+    public ResponseEntity<List<TrasactionDto>> fetchAccountTransactions(@PathVariable("id") Long accountId){
+
+        List<TrasactionDto> transactions = accountService.getAccountTransactions(accountId);
+
+        return ResponseEntity.ok(transactions);
+    }
+
 }
